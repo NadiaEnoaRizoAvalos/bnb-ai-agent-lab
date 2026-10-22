@@ -1,0 +1,28 @@
+---
+description: Restricciones de ConstruAgent (fases 0–5, demo simulada, sin fase 6).
+alwaysApply: true
+---
+
+# ConstruAgent
+
+Fuente de alcance: `.cursor/PlanAgent_Cursor.md`. No copies ese plan a esta regla.
+
+## Alcance
+
+- Implementá solo fases 0–5. La fase 6 (BNB real) está prohibida para el agente.
+- Conservá el workspace de Studio en `construagent/` (`app/agent/`, `studio.toml`, `agentcore/`, `.studio/`).
+- La app web vive en `construagent/app/web`. No ejecutes `bag init` de nuevo.
+- Datos, precios, proveedores y pagos son simulados y deben etiquetarse como demostrativos.
+- No conectes wallets, contratos, mainnet, AWS ni credenciales reales en fases 0–5.
+
+## Calidad
+
+- Validá entrada en el servidor. El LLM (futuro) no modifica precios ni límites de gasto.
+- Probá cada funcionalidad coherente (Vitest; Playwright en la demo).
+- Commits locales descriptivos por funcionalidad. Sin push, PR ni merge automático.
+- Actualizá `construagent/ESTADO_DEL_PROYECTO.md` al cerrar cada fase.
+
+## Invariantes de Studio
+
+- No muevas `.studio/wallets/` a `app/agent/`.
+- No expongas firma como herramienta LLM. `app/agent/src/signing.ts` es código fijo.
