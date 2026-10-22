@@ -2,6 +2,10 @@
 
 Última actualización: 2026-10-22
 
+## Pausa segura
+
+Desarrollo pausado a solicitud de la propietaria para trasladar el equipo. No hay servidores del proyecto escuchando en los puertos 3000, 9000 o 8088 y no quedó una ejecución de Playwright activa. Los resultados temporales, dependencias, `.next/` y `.studio/` permanecen ignorados por Git.
+
 ## Estado por fase
 
 | Fase | Estado | Avance | Resultado |
@@ -15,6 +19,8 @@
 | 6. BNB Agent Studio | Reservada/bloqueada por alcance | 0 % | No ejecutar. Solo documentar interfaces futuras para la propietaria. |
 
 Avance global de las fases autorizadas (0–5): **100 %**.
+
+No existe una fase 0–5 actualmente en desarrollo: todas están terminadas. El proyecto queda pausado antes de la fase 6, que no forma parte del alcance autorizado y debe iniciarla personalmente la propietaria.
 
 ## Funcionalidades implementadas
 
@@ -43,13 +49,20 @@ Aprobadas el 2026-10-22:
 - Next.js build: correcto.
 - Playwright Chromium: 2/2, ejecutado fuera del sandbox del editor.
 
+Pruebas pendientes: ninguna para las fases 0–5. Al reanudar conviene repetir la matriz completa únicamente si cambió el código o el entorno.
+
 ## Problemas conocidos
 
 - Playwright necesita Chromium instalado con `pnpm exec playwright install chromium`.
 - Dentro del sandbox de Codex, Chromium puede quedar bloqueado; ejecutar Playwright con permiso de proceso externo.
 - Next.js avisa en desarrollo sobre el origen `127.0.0.1`; no afecta el build ni los tests actuales.
 - Los precios, stocks, descuentos y órdenes son exclusivamente ficticios.
+- No existen errores bloqueantes conocidos. La advertencia de `allowedDevOrigins` de Next.js durante Playwright es informativa y no afecta el build ni los flujos actuales.
 
 ## Próxima tarea exacta
 
-Las fases autorizadas están completas. La próxima tarea posible es exclusivamente la fase 6, que debe iniciar la propietaria en una rama separada siguiendo `INTEGRACION_BNB.md`. Antes de cualquier cambio, releer `AGENTS.md`, comprobar `git status` y mantener testnet/simulación hasta contar con autorización explícita.
+Al reanudar: abrir la raíz `bnb-ai-agent-lab`, leer `PROGRESO.md`, `CONTEXTO_AGENTES.md`, `AGENTS.md` e `INTEGRACION_BNB.md`, ejecutar `git status` y confirmar que la rama siga limpia. No hace falta continuar las fases 0–5. La única fase restante del plan total es la fase 6, reservada a la propietaria; debe iniciarse en una rama separada y con autorización explícita, manteniendo testnet/simulación hasta completar su revisión de seguridad.
+
+## Qué falta para completar el plan total
+
+Solo falta la integración real de fase 6: identidad, comunicación con agentes, wallet de testnet, contratos y pagos controlados. Esa fase está deliberadamente sin ejecutar; la aplicación web demostrativa ya está completa.
