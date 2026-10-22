@@ -49,3 +49,21 @@ export interface BudgetResult {
   warnings: string[];
 }
 
+export interface ComparisonResult {
+  options: BudgetResult[];
+  recommendedSupplierId: string | null;
+  explanation: string;
+}
+
+export type NegotiationStatus = "oferta" | "requiere_aprobacion" | "rechazada" | "confirmada";
+
+export interface NegotiationResult {
+  id: string;
+  supplierName: string;
+  originalTotal: number;
+  offeredTotal: number;
+  status: NegotiationStatus;
+  reason: string;
+  messages: Array<{ agent: "ConstruAgent" | "ProveedorAgent"; text: string }>;
+  orderId?: string;
+}

@@ -1,16 +1,5 @@
 import type { Metadata } from "next";
-import { Source_Sans_3, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
-
-const sans = Source_Sans_3({
-  variable: "--font-sans",
-  subsets: ["latin"],
-});
-
-const serif = Source_Serif_4({
-  variable: "--font-serif",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "ConstruAgent",
@@ -25,9 +14,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${sans.variable} ${serif.variable} antialiased`}>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
