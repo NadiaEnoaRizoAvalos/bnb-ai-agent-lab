@@ -4,7 +4,7 @@
 
 ## Fase actual
 
-Fase 0 terminada. Próxima fase: interfaz web y flujo demostrativo.
+Fases 0–5 completadas y verificadas. Fase 6 reservada a la propietaria.
 
 ## Hallazgos de inspección
 
@@ -22,6 +22,14 @@ Fase 0 terminada. Próxima fase: interfaz web y flujo demostrativo.
 - `test`, `typecheck`, `lint` y `build` ejecutados correctamente.
 - No se ejecutaron wallets, pagos, despliegues ni integraciones externas.
 
+## Verificación final
+
+- Vitest: 15/15 pruebas aprobadas.
+- TypeScript y ESLint: sin errores.
+- Build de Next.js: aprobado.
+- Playwright Chromium: 2/2 flujos aprobados.
+- No se ejecutaron wallets, pagos, despliegues ni integraciones externas.
+
 ## Siguiente paso
 
-Construir la interfaz y el flujo local de las fases 1–5, manteniendo todos los datos y operaciones como simulados.
+No quedan tareas de las fases 0–5. La propietaria puede iniciar la fase 6 siguiendo `INTEGRACION_BNB.md`; consultar `PROGRESO.md` y `CONTEXTO_AGENTES.md` para el checkpoint completo.

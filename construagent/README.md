@@ -23,7 +23,16 @@ pnpm --filter construagent-web build
 
 Copiá `app/web/.env.example` a `app/web/.env.local` si querés variables locales. No pongas claves reales.
 
-Documentos: `ARQUITECTURA.md`, `ESTADO_DEL_PROYECTO.md`. El plan maestro está en `../.cursor/PlanAgent_Cursor.md`.
+Documentos principales:
+
+- `PROGRESO.md` — checkpoint exacto y pruebas.
+- `CONTEXTO_AGENTES.md` — transferencia a Cursor, Codex, Antigravity o VS Code.
+- `ARQUITECTURA.md` — módulos y comunicación.
+- `GUIA_DEMO.md` — recorrido reproducible.
+- `INTEGRACION_BNB.md` — interfaces y resguardos para la fase reservada.
+- `CAMBIOS.md` — registro por fase y commit.
+
+El plan maestro original está en `../.cursor/PlanAgent_Cursor.md`.
 
 ## Agente Studio (`app/agent/`)
 
