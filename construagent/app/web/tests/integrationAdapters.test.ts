@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { createBudgets } from "@/features/budgets/budgetService";
 import { getIntegrationPorts } from "@/integrations/container";
+import { getIntegrationMode } from "@/integrations/runtimeConfig";
 
 describe("puertos de integración en modo simulado", () => {
   const ports = getIntegrationPorts();
@@ -9,6 +10,10 @@ describe("puertos de integración en modo simulado", () => {
     expect(ports.mode).toBe("simulation");
     expect(ports.capabilities.every((capability) => !capability.executable)).toBe(true);
     expect(ports.capabilities.find((item) => item.name === "chain_reads")?.state).toBe("not_configured");
+  });
+
+  it("rechaza modos externos no implementados en lugar de conectarse", () => {
+    expect(() => getIntegrationMode({ CONSTRUAGENT_INTEGRATION_MODE: "external" })).toThrow(/no disponible/i);
   });
 
   it("resuelve identidades locales sin afirmar verificación externa", async () => {
