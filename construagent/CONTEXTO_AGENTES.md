@@ -26,6 +26,7 @@ construagent/
 │   ├── chat/                     # interpretación determinista
 │   ├── suppliers/                # comparación explicable
 │   └── negotiation/              # estados y autorización
+├── app/web/src/integrations/     # puertos, configuración y mocks de fase 6
 ├── app/web/src/types/            # contratos compartidos
 ├── app/web/tests/                # Vitest y Playwright
 └── app/agent/                    # scaffold BNB; no modificar en fases 0–5
@@ -40,6 +41,8 @@ construagent/
 - Una negociación confirmada es idempotente: aprobar otra vez no genera otra orden.
 - No hay base de datos. El estado de UI es efímero y el catálogo es TypeScript.
 - Se usan fuentes del sistema para que desarrollo y tests no dependan de Google Fonts.
+- El composition root acepta solo `simulation`; no existe un adaptador BNB real ni un modo activable por configuración.
+- La negociación atraviesa `NegotiationPort`; identidad, acuerdo y pago tienen mocks explícitamente no ejecutables.
 
 ## Convenciones
 
@@ -73,7 +76,8 @@ En PowerShell puede ser necesario escribir `pnpm.cmd`. La primera ejecución E2E
 - No conectar `app/web` con `app/agent` todavía.
 - `app/agent/src/signing.ts` es el único lugar futuro para firma on-chain y no es una herramienta LLM.
 - Mantener precios, stocks, identidad de agentes y órdenes en modo ficticio.
+- No convertir referencias `SIM-*` u órdenes `ORD-*` en evidencia on-chain.
 
 ## Estado para continuar
 
-Fases 0–5 implementadas y verificadas. No hay tareas pendientes dentro del alcance autorizado. La fase 6 solo puede iniciarla la propietaria con autorización explícita. Leer primero `PROGRESO.md`, `CAMBIOS.md`, `ARQUITECTURA.md`, `INTEGRACION_BNB.md`, `AGENTS.md` y ejecutar `git status`. No repetir el motor ni el flujo E2E ya funcional.
+Fases 0–5 implementadas. La preparación local de fase 6 también está terminada: contratos, mocks, configuración fail-closed, diagnóstico y pruebas. La integración real no comenzó. Leer primero `PROGRESO.md`, `CAMBIOS.md`, `ARQUITECTURA.md`, `INTEGRACION_BNB.md`, `AGENTS.md` y ejecutar `git status`. El próximo agente debe verificar documentación oficial antes de crear cualquier adaptador externo; no debe inventar APIs ni operar `app/agent/` sin la skill correspondiente.

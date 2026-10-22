@@ -19,6 +19,7 @@ ConstruAgent combina dos piezas en el mismo workspace de BNB Agent Studio:
 - `features/chat/` — chat determinista del prototipo.
 - `features/negotiation/` — orquestación y estados simulados.
 - `lib/` — validaciones, banderas de demo y adaptadores futuros.
+- `integrations/` — puertos neutrales, composition root y adaptadores simulados para preparar fase 6.
 - `types/` — contratos de datos compartidos.
 - `tests/` — Vitest (reglas de negocio) y Playwright (flujos de UI).
 
@@ -33,7 +34,13 @@ Las reglas de negocio no viven en componentes React. La UI llama a Route Handler
 5. `features/catalog` aporta precios **ficticios** etiquetados como demostrativos.
 6. La página pinta el presupuesto; luego comparación y negociación reutilizan ese resultado.
 
-No hay base de datos: el catálogo es un módulo TypeScript. La fase 6 (fuera de este trabajo) sustituirá adaptadores en `lib/adapters/` por lecturas reales de Studio.
+No hay base de datos: el catálogo es un módulo TypeScript. Una integración futura sustituirá implementaciones bajo `integrations/simulation/` por adaptadores respaldados por documentación oficial.
+
+## Frontera de integración preparada
+
+`src/integrations/contracts.ts` define qué necesita el dominio sin importar SDKs externos. `container.ts` selecciona implementaciones y actualmente acepta únicamente `simulation`; cualquier otro modo falla de forma segura. Los adaptadores bajo `simulation/` nunca firman, transfieren activos ni afirman verificación externa.
+
+La ruta de negociación ya usa `NegotiationPort`, lo que comprueba la sustitución sin acoplar la UI. `GET /api/integrations/status` expone solamente capacidades y estados seguros, nunca configuración sensible. Un adaptador real futuro deberá validar los contratos oficiales en el borde y no podrá desplazar las reglas de presupuesto o autorización.
 
 ## Cómo agregar una función
 
@@ -47,4 +54,4 @@ No hay base de datos: el catálogo es un módulo TypeScript. La fase 6 (fuera de
 
 - Precios y pagos se muestran como simulados.
 - Un modelo de IA no puede cambiar precios ni techos de gasto.
-- `app/agent/src/signing.ts` no se usa desde la web en fases 0–5.
+- `app/agent/src/signing.ts` no se usa desde la web y seguirá siendo el único punto de firma futuro.

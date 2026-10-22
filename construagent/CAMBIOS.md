@@ -29,3 +29,13 @@
 - Se incorporaron guía de demo, contexto multiagente, progreso y guía de integración futura.
 - Se documentaron límites de seguridad, comandos y proceso de transferencia.
 - Matriz final: 15/15 Vitest, TypeScript, ESLint, build y 2/2 Playwright aprobados.
+
+### Fase 6 — Preparación local (`e60dd01`, `f7f8877`, `e972a34`)
+
+- Se definieron puertos neutrales para catálogo, identidad, negociación, acuerdos y pagos.
+- Se agregaron adaptadores simulados no ejecutables y un endpoint seguro de capacidades.
+- La negociación existente quedó desacoplada mediante `NegotiationPort`.
+- La configuración acepta únicamente `simulation` y rechaza modos externos desconocidos.
+- Se agregó una frontera que devuelve `not_configured` en vez de inventar lecturas on-chain.
+- Se agregaron siete pruebas de integración; total actual: 22/22 Vitest y 2/2 E2E.
+- No se modificó el agente, no se ejecutó Studio y no hubo red, wallet, firma, pago o deploy.
