@@ -49,7 +49,7 @@ export function Dashboard() {
   }
 
   async function negotiate(budget: BudgetResult) {
-    const response = await fetch("/api/negotiations", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "request", budget, maxBudget: optionalNumber(form.maxBudget) }) });
+    const response = await fetch("/api/negotiations", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "request", supplierId: budget.supplierId, request: numericForm(form) }) });
     const data = await response.json();
     setNegotiation(data.negotiation);
     setTimeout(() => document.querySelector("#negociacion")?.scrollIntoView({ behavior: "smooth" }), 0);
@@ -95,4 +95,3 @@ function BudgetCard({ budget, recommended, onNegotiate }: { budget: BudgetResult
 
 function optionalNumber(value: string) { const parsed = Number(value); return value !== "" && Number.isFinite(parsed) ? parsed : undefined; }
 function numericForm(form: { width: string; length: string; wastePercent: string; maxBudget: string }) { return { width: Number(form.width), length: Number(form.length), wastePercent: Number(form.wastePercent), maxBudget: optionalNumber(form.maxBudget) }; }
-

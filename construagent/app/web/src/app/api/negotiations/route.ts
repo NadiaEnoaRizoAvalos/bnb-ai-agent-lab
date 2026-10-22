@@ -1,12 +1,17 @@
 import { NextResponse } from "next/server";
 import { decideOffer, requestOffer } from "@/features/negotiation/negotiationEngine";
-import type { BudgetResult, NegotiationResult } from "@/types/domain";
+import { createBudgets } from "@/features/budgets/budgetService";
+import { validateBudgetRequest } from "@/features/budgets/validation";
+import type { NegotiationResult } from "@/types/domain";
 
 export async function POST(request: Request) {
   const body = (await request.json()) as Record<string, unknown>;
   try {
-    if (body.action === "request" && body.budget) {
-      return NextResponse.json({ negotiation: requestOffer(body.budget as BudgetResult, optionalNumber(body.maxBudget)), simulated: true });
+    if (body.action === "request" && body.request && typeof body.supplierId === "string") {
+      // El servidor reconstruye la cotización: nunca acepta precios calculados por el navegador.
+      const budgetRequest = validateBudgetRequest({ ...(body.request as object), supplierId: body.supplierId });
+      const [budget] = createBudgets(budgetRequest);
+      return NextResponse.json({ negotiation: requestOffer(budget, budgetRequest.maxBudget), simulated: true });
     }
     if (body.action === "decide" && body.negotiation && typeof body.approved === "boolean") {
       return NextResponse.json({ negotiation: decideOffer(body.negotiation as NegotiationResult, body.approved), simulated: true });
@@ -16,8 +21,3 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "No se pudo procesar la negociación simulada." }, { status: 400 });
   }
 }
-
-function optionalNumber(value: unknown): number | undefined {
-  return typeof value === "number" && Number.isFinite(value) ? value : undefined;
-}
-
