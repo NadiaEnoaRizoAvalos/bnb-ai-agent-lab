@@ -33,6 +33,13 @@ export interface PaymentPreview {
   notice: string;
 }
 
+export interface ChainObservation {
+  reference: string;
+  state: "not_configured";
+  verified: false;
+  notice: string;
+}
+
 export interface CatalogPort {
   listSupplierIds(): Promise<string[]>;
 }
@@ -54,6 +61,10 @@ export interface PaymentPort {
   preview(negotiation: NegotiationResult): Promise<PaymentPreview>;
 }
 
+export interface ChainReadPort {
+  observe(reference: string): Promise<ChainObservation>;
+}
+
 export interface IntegrationPorts {
   mode: IntegrationMode;
   capabilities: IntegrationCapability[];
@@ -62,5 +73,5 @@ export interface IntegrationPorts {
   negotiation: NegotiationPort;
   agreements: AgreementPort;
   payments: PaymentPort;
+  chainReads: ChainReadPort;
 }
-

@@ -1,6 +1,7 @@
 import type { IntegrationPorts } from "./contracts";
 import { simulatedAgreementAdapter } from "./simulation/agreementAdapter";
 import { simulatedCatalogAdapter } from "./simulation/catalogAdapter";
+import { simulatedChainReadAdapter } from "./simulation/chainReadAdapter";
 import { simulatedIdentityAdapter } from "./simulation/identityAdapter";
 import { simulatedNegotiationAdapter } from "./simulation/negotiationAdapter";
 import { simulatedPaymentAdapter } from "./simulation/paymentAdapter";
@@ -27,5 +28,6 @@ export function getIntegrationPorts(): IntegrationPorts {
     negotiation: simulatedNegotiationAdapter,
     agreements: simulatedAgreementAdapter,
     payments: simulatedPaymentAdapter,
+    chainReads: simulatedChainReadAdapter,
   };
 }

@@ -29,6 +29,14 @@ describe("puertos de integración en modo simulado", () => {
     await expect(ports.catalog.listSupplierIds()).resolves.toEqual(["obra-norte", "casa-sur"]);
   });
 
+  it("no inventa resultados de lecturas on-chain", async () => {
+    await expect(ports.chainReads.observe("referencia-local")).resolves.toMatchObject({
+      reference: "referencia-local",
+      state: "not_configured",
+      verified: false,
+    });
+  });
+
   it("prepara acuerdos no ejecutables y siempre exige aprobación", async () => {
     const budget = createBudgets({ width: 4, length: 3 })[0];
     const negotiation = await ports.negotiation.requestOffer(budget, 200);
